@@ -3,18 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brainrodle</title>
+    <title>Brainrodle - Unlimited Mode</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .word-list-panel {
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            background: #1a1a1b;
+            padding: 20px;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            border-left: 2px solid #3a3a3c;
+        }
+        .word-list-panel.show {
+            transform: translateX(0);
+        }
+        .word-item {
+            padding: 8px;
+            border-bottom: 1px solid #3a3a3c;
+            color: white;
+        }
+        .word-item small {
+            display: block;
+            color: #888;
+            font-size: 0.8em;
+            margin-top: 4px;
+        }
+        .toggle-word-list {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            z-index: 1001;
+            background: #538d4e;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .toggle-word-list:hover {
+            background: #3a6b35;
+        }
+        @media (max-width: 768px) {
+            .word-list-panel {
+                width: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="game-container">
         <header>
             <h1>BRAINRODLE</h1>
-            <div class="subtitle">Guess the brainrot text!</div>
+            <div class="subtitle">Unlimited Mode - Play as much as you want!</div>
             <div class="instructions">Press ENTER to confirm • BACKSPACE to delete</div>
             <div class="nav-buttons">
-                <button class="nav-button" onclick="window.location.href='unlimited.html'">🎮 Unlimited Mode</button>
-                <button class="nav-button" id="viewWordsBtn">📖 View Words</button>
+                <button class="nav-button" onclick="window.location.href='index.html'">🏠 Daily Mode</button>
+                <button class="nav-button nav-new-word" id="newWordBtn">🔄 New Word</button>
                 <button class="stats-button">📊 Statistics</button>
             </div>
         </header>
@@ -48,7 +99,7 @@
                 <button data-key="L">L</button>
             </div>
             <div class="keyboard-row">
-                <button data-key="ENTER" class="wide-button" title="Press Enter to confirm your word">Enter ↵</button>
+                <button data-key="ENTER" class="enter-key-btn">ENTER</button>
                 <button data-key="Z">Z</button>
                 <button data-key="X">X</button>
                 <button data-key="C">C</button>
@@ -56,18 +107,16 @@
                 <button data-key="B">B</button>
                 <button data-key="N">N</button>
                 <button data-key="M">M</button>
-                <button data-key="DELETE" class="wide-button" title="Press Backspace to delete">⌫ Delete</button>
+                <button data-key="DELETE" class="delete-key-btn">DELETE</button>
             </div>
         </div>
     </div>
 
     <div id="message-container"></div>
-    <div id="words-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Available Words</h2>
-            <div class="words-list"></div>
-        </div>
+    <button class="toggle-word-list">Toggle Word List</button>
+    <div class="word-list-panel">
+        <h3 style="color: white; margin-bottom: 15px;">Available Words:</h3>
+        <div id="word-list-content"></div>
     </div>
 
     <!-- Social Links Footer -->
@@ -78,6 +127,6 @@
         </a>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="unlimited.js"></script>
 </body>
 </html> 
