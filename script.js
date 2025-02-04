@@ -1,58 +1,67 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Mobile menu functionality
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    hamburgerMenu.addEventListener('click', () => {
+        navMenu.classList.toggle('show');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !hamburgerMenu.contains(e.target) && navMenu.classList.contains('show')) {
+            navMenu.classList.remove('show');
+        }
+    });
+
     // Brainrot word list - curated from Gen Z slang
     const WORDS = [
-        // Classic Brainrot Words
-        "BASED",     // Strong agreement/approval
-        "ALPHA",     // Socially dominant person
-        "AHHH",      // Supports description
-        "AURA",      // Energy/personality vibe
-        "BAKA",      // Japanese for fool
-        "BLUD",      // Brother/friend
-        "BETA",      // Socially submissive
-        
-        // Modern Brainrot Terms
-        "ACOUSTIC",  // Being different/odd
-        "BACKSHOT", // From behind
-        "BEDROT",   // Lying in bed too long
-        "BRAINROT", // Brain fixated on topic
-        "BOOKTOK",  // Book side of TikTok
-        "BALKAN",   // From Balkan region
-        "BLUMPKIN", // NSFW act
-        
-        // Extended Terms
-        "ANGELSHOT",    // Bar safety code
-        "BACKROOMS",    // Endless plane existence
-        "BATTLEBUS",    // Fortnite starting bus
-        "BONESMASH",    // Jaw manipulation
-        "BIBLICALLY",   // According to Bible
-        "BINGCHILLING", // Ice cream (Chinese)
-        
-        // Existing Words
-        "RATIO",  // Getting more likes
-        "SUSSY",  // Suspicious behavior
-        "YIKES",  // Expression of shock
-        "SLAYZ",  // Doing excellent
-        "SIGMA",  // Independent mindset
-        "BRUHH",  // Expression of shock
-        "BUSSI",  // Extremely good
-        "DRIPP",  // Stylish fashion
-        "STANX",  // Super fan
-        "TEAAA",  // Gossip/drama
-        "VIBEN",  // Good vibes
-        "IYKYK",  // If you know you know
-        "BFFRS",  // Be for real
-        "NAHHH",  // Expression of disbelief
-        "CHEUG",  // Outdated/trying hard
-        "SKIBZ",  // Skibbidi trend
-        "DELUU",  // Delusional
-        "RIZZY",  // Charisma
-        "PURPL",  // Purple heart trend
-        "COOKT",  // From cooking
-        "PERIODT", // Emphasizing point
-        "FINNA",  // Going to
-        "BOUJEE", // High class
-        "SERVV",  // Doing well
-        "SNATCHED" // Looking perfect
+        // Classic Words
+        "ALPHA",    // Socially dominant person
+        "AHH",      // Expression
+        "AI",       // Artificial Intelligence
+        "ALDI",     // Store name
+        "AURA",     // Energy/vibe
+        "AYO",      // Hey/expression
+        "BAKA",     // Japanese for fool
+        "BASED",    // Strong agreement
+        "BETA",     // Socially submissive
+        "BLUD",     // Brother/friend
+        "BBL",      // Brazilian Butt Lift
+        "BRUH",     // Expression
+        "CAP",      // Lie/fake
+        "CHAD",     // Cool guy
+        "COOK",     // Doing well
+        "DEETA",    // Data
+        "DIH",      // Expression
+        "DOG",      // Friend
+        "DREAM",    // YouTuber
+        "DUKE",     // Content creator
+        "F",        // Pay respects
+        "G",        // Gangster/friend
+        "GYATT",    // Expression
+        "HATS",     // Head wear
+        "HUZZ",     // Expression
+        "L",        // Loss
+        "LEAN",     // Purple drink
+        "MID",      // Average/mediocre
+        "MANGO",    // Fruit/slang
+        "OPP",      // Opposition
+        "OPPS",     // Opponents
+        "PRIME",    // Drink/best
+        "RATIO",    // More likes
+        "RIZZ",     // Charisma
+        "SLAY",     // Excellent
+        "SLIME",    // Friend
+        "SUS",      // Suspicious
+        "TS",       // That's tough
+        "UNC",      // Uncle
+        "UWU",      // Cute expression
+        "W",        // Win
+        "WOMP",     // Expression
+        "XQC",      // Streamer
+        "YB",       // YoungBoy
+        "YAP"       // Talk
     ];
 
     // Game state
@@ -556,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Prevent console access and debugging
-    (function() {
+    /*(function() {
         // Override console methods
         const noop = () => undefined;
         const noopReturn = (val) => () => val;
@@ -612,5 +621,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 showMessage("No cheating! 😉");
             }
         });
-    })();
+    })();*/
 }); 

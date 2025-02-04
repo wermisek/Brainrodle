@@ -12,27 +12,32 @@
             top: 0;
             bottom: 0;
             width: 250px;
-            background: #1a1a1b;
+            background: rgba(26, 26, 27, 0.95);
             padding: 20px;
             overflow-y: auto;
             transform: translateX(100%);
             transition: transform 0.3s ease;
             z-index: 1000;
-            border-left: 2px solid #3a3a3c;
+            border-left: 2px solid #ff00ff;
+            backdrop-filter: blur(10px);
         }
         .word-list-panel.show {
             transform: translateX(0);
         }
         .word-item {
-            padding: 8px;
-            border-bottom: 1px solid #3a3a3c;
+            padding: 12px;
+            margin-bottom: 5px;
             color: white;
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+            transition: all 0.2s ease;
         }
-        .word-item small {
-            display: block;
-            color: #888;
-            font-size: 0.8em;
-            margin-top: 4px;
+        .word-item:hover {
+            background: rgba(255, 0, 255, 0.2);
+            transform: translateY(-2px);
         }
         .toggle-word-list {
             position: fixed;
@@ -60,13 +65,20 @@
 <body>
     <div class="game-container">
         <header>
+            <div class="mobile-header">
+                <button class="hamburger-menu">☰</button>
+                <h1>BRAINRODLE</h1>
+            </div>
             <h1>BRAINRODLE</h1>
-            <div class="subtitle">Unlimited Mode - Play as much as you want!</div>
-            <div class="instructions">Press ENTER to confirm • BACKSPACE to delete</div>
-            <div class="nav-buttons">
-                <button class="nav-button" onclick="window.location.href='index.html'">🏠 Daily Mode</button>
-                <button class="nav-button nav-new-word" id="newWordBtn">🔄 New Word</button>
-                <button class="stats-button">📊 Statistics</button>
+            <div class="nav-menu">
+                <div class="subtitle">Unlimited Mode - Play as much as you want!</div>
+                <div class="instructions">Press ENTER to confirm • BACKSPACE to delete</div>
+                <div class="nav-buttons">
+                    <button class="nav-button" onclick="window.location.href='index.html'">🏠 Daily Mode</button>
+                    <button class="nav-button nav-new-word" id="newWordBtn">🔄 New Word</button>
+                    <button class="nav-button" id="viewWordsBtn">📖 View Words</button>
+                    <button class="stats-button">📊 Statistics</button>
+                </div>
             </div>
         </header>
 
@@ -113,7 +125,6 @@
     </div>
 
     <div id="message-container"></div>
-    <button class="toggle-word-list">Toggle Word List</button>
     <div class="word-list-panel">
         <h3 style="color: white; margin-bottom: 15px;">Available Words:</h3>
         <div id="word-list-content"></div>

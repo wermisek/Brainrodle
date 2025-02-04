@@ -1,6 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Mobile menu functionality
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    hamburgerMenu.addEventListener('click', () => {
+        navMenu.classList.toggle('show');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !hamburgerMenu.contains(e.target) && navMenu.classList.contains('show')) {
+            navMenu.classList.remove('show');
+        }
+    });
+
     // Prevent console access and debugging
-    (function() {
+    /*(function() {
         // Override console methods
         const noop = () => undefined;
         const noopReturn = (val) => () => val;
@@ -56,62 +71,56 @@ document.addEventListener('DOMContentLoaded', () => {
                 showMessage("No cheating! 😉");
             }
         });
-    })();
+    })();*/
 
     // Import word list from main game
     const WORDS = [
-        // Classic Brainrot Words
-        "BASED",     // Strong agreement/approval
-        "ALPHA",     // Socially dominant person
-        "AHHH",      // Supports description
-        "AURA",      // Energy/personality vibe
-        "BAKA",      // Japanese for fool
-        "BLUD",      // Brother/friend
-        "BETA",      // Socially submissive
-        
-        // Modern Brainrot Terms
-        "ACOUSTIC",  // Being different/odd
-        "BACKSHOT", // From behind
-        "BEDROT",   // Lying in bed too long
-        "BRAINROT", // Brain fixated on topic
-        "BOOKTOK",  // Book side of TikTok
-        "BALKAN",   // From Balkan region
-        "BLUMPKIN", // NSFW act
-        
-        // Extended Terms
-        "ANGELSHOT",    // Bar safety code
-        "BACKROOMS",    // Endless plane existence
-        "BATTLEBUS",    // Fortnite starting bus
-        "BONESMASH",    // Jaw manipulation
-        "BIBLICALLY",   // According to Bible
-        "BINGCHILLING", // Ice cream (Chinese)
-        
-        // Existing Words
-        "RATIO",  // Getting more likes
-        "SUSSY",  // Suspicious behavior
-        "YIKES",  // Expression of shock
-        "SLAYZ",  // Doing excellent
-        "SIGMA",  // Independent mindset
-        "BRUHH",  // Expression of shock
-        "BUSSI",  // Extremely good
-        "DRIPP",  // Stylish fashion
-        "STANX",  // Super fan
-        "TEAAA",  // Gossip/drama
-        "VIBEN",  // Good vibes
-        "IYKYK",  // If you know you know
-        "BFFRS",  // Be for real
-        "NAHHH",  // Expression of disbelief
-        "CHEUG",  // Outdated/trying hard
-        "SKIBZ",  // Skibbidi trend
-        "DELUU",  // Delusional
-        "RIZZY",  // Charisma
-        "PURPL",  // Purple heart trend
-        "COOKT",  // From cooking
-        "PERIODT", // Emphasizing point
-        "FINNA",  // Going to
-        "BOUJEE", // High class
-        "SERVV",  // Doing well
-        "SNATCHED" // Looking perfect
+        // Classic Words
+        "ALPHA",    // Socially dominant person
+        "AHH",      // Expression
+        "AI",       // Artificial Intelligence
+        "ALDI",     // Store name
+        "AURA",     // Energy/vibe
+        "AYO",      // Hey/expression
+        "BAKA",     // Japanese for fool
+        "BASED",    // Strong agreement
+        "BETA",     // Socially submissive
+        "BLUD",     // Brother/friend
+        "BBL",      // Brazilian Butt Lift
+        "BRUH",     // Expression
+        "CAP",      // Lie/fake
+        "CHAD",     // Cool guy
+        "COOK",     // Doing well
+        "DEETA",    // Data
+        "DIH",      // Expression
+        "DOG",      // Friend
+        "DREAM",    // YouTuber
+        "DUKE",     // Content creator
+        "F",        // Pay respects
+        "G",        // Gangster/friend
+        "GYATT",    // Expression
+        "HATS",     // Head wear
+        "HUZZ",     // Expression
+        "L",        // Loss
+        "LEAN",     // Purple drink
+        "MID",      // Average/mediocre
+        "MANGO",    // Fruit/slang
+        "OPP",      // Opposition
+        "OPPS",     // Opponents
+        "PRIME",    // Drink/best
+        "RATIO",    // More likes
+        "RIZZ",     // Charisma
+        "SLAY",     // Excellent
+        "SLIME",    // Friend
+        "SUS",      // Suspicious
+        "TS",       // That's tough
+        "UNC",      // Uncle
+        "UWU",      // Cute expression
+        "W",        // Win
+        "WOMP",     // Expression
+        "XQC",      // Streamer
+        "YB",       // YoungBoy
+        "YAP"       // Talk
     ];
 
     // Game state
@@ -234,56 +243,43 @@ document.addEventListener('DOMContentLoaded', () => {
     resetGame();
 
     // Word list panel functionality
-    const toggleWordListBtn = document.querySelector('.toggle-word-list');
+    const viewWordsBtn = document.getElementById('viewWordsBtn');
     const wordListPanel = document.querySelector('.word-list-panel');
     const wordListContent = document.getElementById('word-list-content');
 
     // Populate word list
     function populateWordList() {
         wordListContent.innerHTML = WORDS.map(word => {
-            const description = getWordDescription(word);
-            return `<div class="word-item">${word}<small>${description}</small></div>`;
+            return `<div class="word-item">${word}</div>`;
         }).join('');
     }
 
-    // Word descriptions
+    // Word descriptions - can be removed since we're not using them anymore
     function getWordDescription(word) {
-        const descriptions = {
-            "RATIO": "Getting more likes than original post",
-            "BASED": "Strong agreement/approval",
-            "SUSSY": "Suspicious behavior",
-            "YIKES": "Expression of shock",
-            "SLAYZ": "Doing excellent",
-            "SIGMA": "Independent/lone wolf mindset",
-            "BRUHH": "Expression of shock/disappointment",
-            "BUSSI": "From 'bussin' - extremely good",
-            "DRIPP": "Stylish fashion",
-            "STANX": "Super fan",
-            "TEAAA": "Gossip/drama",
-            "VIBEN": "Good vibes/energy",
-            "IYKYK": "If you know you know",
-            "BFFRS": "Be for real/best friends",
-            "NAHHH": "Expression of disbelief",
-            "CHEUG": "Outdated/trying too hard",
-            "SKIBZ": "From 'skibbidi' trend",
-            "DELUU": "From 'delulu' - delusional",
-            "RIZZY": "From 'rizz' - charisma",
-            "PURPL": "Purple heart trend",
-            "COOKT": "From 'cooked/cooking'",
-            "PERIODT": "Emphasizing a point",
-            "FINNA": "Going to/about to",
-            "BOUJEE": "High class/fancy",
-            "SERVV": "Doing something well",
-            "SNATCHED": "Looking good/perfect"
-        };
-        return descriptions[word] || "";
+        return "";
     }
 
     // Toggle word list panel
-    toggleWordListBtn.addEventListener('click', () => {
+    viewWordsBtn.addEventListener('click', () => {
         wordListPanel.classList.toggle('show');
         if (wordListPanel.classList.contains('show')) {
             populateWordList();
+        }
+    });
+
+    // Close word list when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!wordListPanel.contains(e.target) && 
+            !viewWordsBtn.contains(e.target) && 
+            wordListPanel.classList.contains('show')) {
+            wordListPanel.classList.remove('show');
+        }
+    });
+
+    // Close word list when menu is closed
+    hamburgerMenu.addEventListener('click', () => {
+        if (!navMenu.classList.contains('show')) {
+            wordListPanel.classList.remove('show');
         }
     });
 
