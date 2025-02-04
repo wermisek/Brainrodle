@@ -564,62 +564,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Prevent console access and debugging
-    /*(function() {
-        // Override console methods
-        const noop = () => undefined;
-        const noopReturn = (val) => () => val;
-        
-        // More thorough console blocking
-        Object.defineProperties(window.console, {
-            log: { get: noopReturn(noop) },
-            debug: { get: noopReturn(noop) },
-            info: { get: noopReturn(noop) },
-            warn: { get: noopReturn(noop) },
-            error: { get: noopReturn(noop) },
-            dir: { get: noopReturn(noop) },
-            dirxml: { get: noopReturn(noop) },
-            trace: { get: noopReturn(noop) },
-            group: { get: noopReturn(noop) },
-            groupCollapsed: { get: noopReturn(noop) },
-            groupEnd: { get: noopReturn(noop) },
-            clear: { get: noopReturn(noop) },
-            count: { get: noopReturn(noop) },
-            assert: { get: noopReturn(noop) },
-            profile: { get: noopReturn(noop) },
-            profileEnd: { get: noopReturn(noop) },
-            time: { get: noopReturn(noop) },
-            timeEnd: { get: noopReturn(noop) },
-            timeStamp: { get: noopReturn(noop) },
-            table: { get: noopReturn(noop) }
+    // Anti-cheat protection
+    (function() {
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
         });
 
-        // Prevent debugging
-        const handler = {
-            get: function(target, name) {
-                return name === 'toString' ? () => '[object Object]' : target[name];
+        // Disable keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 's' || e.key === 'i' || e.key === 'c')) {
+                e.preventDefault();
+                return false;
             }
+        });
+
+        // Detect DevTools
+        let devtools = function() {};
+        devtools.toString = function() {
+            checkDevTools();
+            return '';
         };
-        
-        // Override toString to prevent object inspection
-        Error.prototype.toString = () => '[object Error]';
-        Function.prototype.toString = () => '[object Function]';
-        
-        // Additional protection against dev tools
-        setInterval(() => {
-            const start = performance.now();
-            debugger;
-            const end = performance.now();
-            if (end - start > 100) {
-                showMessage("No cheating! 😉");
+
+        // Check if DevTools is open
+        function checkDevTools() {
+            if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+                document.body.innerHTML = 'Cheating detected!';
             }
+        }
+
+        // Monitor console opening
+        setInterval(function() {
+            checkDevTools();
+            console.log(devtools);
         }, 1000);
 
-        // Detect dev tools opening
-        window.addEventListener('devtoolschange', function(e) {
-            if (e.detail.open) {
-                showMessage("No cheating! 😉");
+        // Prevent source viewing
+        document.onkeydown = function(e) {
+            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 123)) {
+                return false;
             }
-        });
-    })();*/
+        };
+    })();
 }); 

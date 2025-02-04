@@ -457,4 +457,47 @@ document.addEventListener('DOMContentLoaded', () => {
         currentRow++;
         currentTile = 0;
     }
+
+    // Anti-cheat protection
+    (function() {
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 's' || e.key === 'i' || e.key === 'c')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Detect DevTools
+        let devtools = function() {};
+        devtools.toString = function() {
+            checkDevTools();
+            return '';
+        };
+
+        // Check if DevTools is open
+        function checkDevTools() {
+            if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+                document.body.innerHTML = 'Cheating detected!';
+            }
+        }
+
+        // Monitor console opening
+        setInterval(function() {
+            checkDevTools();
+            console.log(devtools);
+        }, 1000);
+
+        // Prevent source viewing
+        document.onkeydown = function(e) {
+            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 123)) {
+                return false;
+            }
+        };
+    })();
 }); 
