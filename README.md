@@ -57,3 +57,11 @@ A modern word-guessing game focused on Gen Z slang and internet culture. Try to 
 ## 🔄 Daily Updates
 
 The game updates with a new word every day at midnight (Warsaw time). 
+
+## 📚 Documentation
+
+- API Reference (Daily Mode): `docs/API_Daily.md`
+- API Reference (Unlimited Mode): `docs/API_Unlimited.md`
+- Components and CSS Hooks: `docs/Components.md`
+- Storage and Timing: `docs/Storage_and_Timing.md`
+- Usage and Examples: `docs/Usage_and_Examples.md`
